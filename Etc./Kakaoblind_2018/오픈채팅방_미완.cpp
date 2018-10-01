@@ -18,7 +18,7 @@ vector<string> solution(vector<string> record) {
 		ss >> uid;
 		ss >> uname;
 
-		user[uid] = uname;
+		if (event == "Enter" || event == "Change") user[uid] = uname;
 	}
 
 	for (int i = 0; i < record.size(); i++) {
@@ -35,11 +35,10 @@ vector<string> solution(vector<string> record) {
 }
 
 void main() {
-	vector<string> record = { "Enter uid1234 Muzi", "Enter uid2345 Muzi", "Leave uid1234", "Enter uid1234 ZZZ", "Change uid1234 aaa", "Leave uid1234"};
+	vector<string> record = { "Enter uid1234 Muzi", "Enter uid4567 Prodo", "Change uid1234 Prodo", "Change uid4567 Ryan", "Leave uid1234" };
 	vector<string> answer = solution(record);
 
 	for (int i = 0; i < answer.size(); i++) {
 		cout << answer[i];
 	}
-	
 }
