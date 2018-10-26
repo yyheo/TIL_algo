@@ -23,7 +23,7 @@ int main(void) {
 			if (num[i] != maxn && num[i] != minn) sum += num[i];
 		}
 
-		double ans = floor(sum / 8 + 0.5);
+		double ans = floor(sum / 8 + 0.5); // 반올림
 		cout << "#" << j+1 << " " << ans << "\n";
 	}
 }
