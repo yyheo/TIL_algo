@@ -17,3 +17,5 @@ long long solution(int N) {
 
 	return sum;
 }
+
+// 리턴 형 long 주의할것
