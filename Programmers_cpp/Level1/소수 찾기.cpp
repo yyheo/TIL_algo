@@ -25,11 +25,8 @@ int solution(int n) {
 }
 
 int main(void) {
-	/*vector<string> answer = solution({"sun", "bed", "car"}, 1);*/
-
 	cout << solution(10);
-
-	//for (int i = 0; i < answer.size(); i++) {
-	//	cout << answer[i];
-	//}
 }
+
+
+//에라토스테네스의 체 활용 문제
