@@ -25,5 +25,3 @@ string solution(string n) {
 int main(void) {
 	cout << solution("try hello world");
 }
-
-// char 
