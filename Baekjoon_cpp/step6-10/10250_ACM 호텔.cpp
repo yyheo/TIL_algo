@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main(void)
@@ -8,15 +9,15 @@ int main(void)
 	while (T--) {
 		cin >> H >> W >> N;
 
-		int a, b;
-		a = N / H + 1;
-		b = N % H;
+		int room, floor;
+		room = N / H + 1;
+		floor = N % H;
 
-		if (b == 0) {
-			b = H;
-			a = N / H;
+		if (floor == 0) {
+			floor = H;
+			room = N / H;
 		}
-		if (a < 10) cout << b << "0" << a << "\n";
-		else cout << b << a << "\n";
+		if (room < 10) cout << floor << "0" << room << "\n";
+		else cout << floor << room << "\n";
 	}
 }
