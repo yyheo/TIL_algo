@@ -7,7 +7,7 @@ int main(void) {
 	int N;
 	cin >> N;
 	vector<int> num(N);
-	for (int i=0; i<N; i++) cin >> num[i];
+	for (int i = 0; i<N; i++) cin >> num[i];
 	sort(num.begin(), num.end());
 	int max = 0;
 	do {
