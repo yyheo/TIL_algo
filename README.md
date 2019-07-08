@@ -1,3 +1,3 @@
 # TIL
-Today I learned for algorithm 📚  
+Today I learned for Algorithm 📚  
 BOJ, Programmers, SWEX
