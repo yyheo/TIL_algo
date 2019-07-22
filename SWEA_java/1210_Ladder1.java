@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class 1210_Ladder1 {
+public class Solution_D4_1210_Ladder1_허윤영 {
 	
 	static int T;
 	static int dy[] = { 0, 0, 1 };
@@ -14,19 +14,17 @@ public class 1210_Ladder1 {
 	static int map[][] = new int[100][100];
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
-		//BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		Scanner sc = new Scanner(System.in);
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
 		
 		for (int tc = 1; tc <= 10; tc++) {
-			T = sc.nextInt();
-			//T = Integer.parseInt(in.readLine());
-			//StringTokenizer st = new StringTokenizer(in.readLine());
-			
+			T = Integer.parseInt(in.readLine());
+	
 			// 사다리 map 초기화
 			for (int i = 0; i < 100; i++) {
+				st = new StringTokenizer(in.readLine());
 				for (int j = 0; j < 100; j++) {
-					map[i][j] = sc.nextInt();
-					//map[i][j] = Integer.parseInt(st.nextToken()); // 소금쟁이 수
+					map[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
 			
