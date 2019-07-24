@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
-public class 11729_하노이탑이동순서_허윤영 {
+public class Q11729_하노이탑이동순서 {
 	static int N;
 	static BufferedWriter bw;
 	public static void main(String[] args) throws IOException, NumberFormatException{
