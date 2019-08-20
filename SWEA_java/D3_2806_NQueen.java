@@ -7,20 +7,20 @@ public class D3_2806_NQueen {
 	static int[] board;
 	static int N, result;
 	static void solve(int q ) {
-		if( q == N ) {
+		if( q == N ) {	// 모두 선택했으면
 			result++;
 			return;
 		}
-		for( int i=0; i<N; i++ ) {
+		for( int i=0; i<N; i++ ) {	// 모든 열 탐색
 			boolean possible = true;
-			for( int j=0; j<q; j++ ) {
-				if( board[j] == i || Math.abs(q-j) == Math.abs(i-board[j]) ) {
+			for( int j=0; j<q; j++ ) {	// 이전에 지나왔던 행들 검사
+				if( board[j] == i || Math.abs(q-j) == Math.abs(i-board[j]) ) {	// 같은 열이거나 대각선이면 불가능
 					possible = false;
 					break;
 				}
 			}
 			if( possible ) {
-				board[q] = i;
+				board[q] = i;	// q : index, 행을 나타냄
 				solve(q+1);
 			}
 		}

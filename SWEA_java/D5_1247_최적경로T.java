@@ -1,4 +1,4 @@
-// 실행시간 2000 넘음
+// 쌤이 풀어주신거 258ms
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Solution_D5_1247_최적경로 {
+public class D5_1247_최적경로T {
 	
 	static int T, N;
 	static int[] dy = { -1, 1, 0, 0 };
@@ -36,35 +36,23 @@ public class Solution_D5_1247_최적경로 {
 				int y = Integer.parseInt(st.nextToken());
 				customer[i] = new Posi(x, y);
 			}
-			permu(0);
+			go(0, company.x, company.y, 0, 0);
 			System.out.println("#" + tc + " " + min);
 		}
 	}
 	
-	static void go(int startX, int startY) {
-		int res = 0;
-		for (int i = 0; i < custSeq.length; i++) {
-			res += Math.abs(customer[custSeq[i]].x - startX) + Math.abs(customer[custSeq[i]].y - startY);
-			startX = customer[custSeq[i]].x;
-			startY = customer[custSeq[i]].y;
-		}
-		res += Math.abs(startX - house.x) + Math.abs(startY - house.y);
-		if (res < min) {
-			min = res;
-		}
+	static void go(int count, int bx, int by, int visited, int result) {
+	if (result >= min) return;
+	if (count == N) { // 고객 집 다 돌았을 경우, 직전 고객과 집까지의 거리 누적
+		result += Math.abs(house.x - bx) + Math.abs(house.y - by);
+		if (result < min) min = result;
+		return;
 	}
-	
-	static void permu(int index) {
-		if (index == N) {
-			go(company.x, company.y);
-			return;
-		}
 		for (int i = 0; i < N; i++) {
-			if (check[i] == 1) continue;
-			check[i] = 1;
-			custSeq[index] = i;					// 선택
-			permu(index + 1);
-			check[i] = 0;
+			if((visited & (1<<i)) == 0) {	// 방문하지 않았으면
+				go(count+1, customer[i].x, customer[i].y, 
+						visited|(1<<i), result + Math.abs(customer[i].x - bx) + Math.abs(customer[i].y - by));
+			}
 		}
 	}
 	
