@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class D3_8444_IM기출1ing {
+public class D3_8444_IM기출1 {
 	static int T, N, res; // N : 방의 갯수
 	static int[] room, target;
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -18,7 +18,7 @@ public class D3_8444_IM기출1ing {
 			for (int i = 1; i <= N; i++) {
 				target[i] = Integer.parseInt(st.nextToken());
 			}
-			on(0);
+			on(0, 1);
 			System.out.println("#" + tc + " " + res);
 		}
 		// 각 방에는 전원 킬 수 있는 스위치가 있음
@@ -26,25 +26,29 @@ public class D3_8444_IM기출1ing {
 		// 특정 방의 스위치를 키고 끄면 배수 방들도 조작됨
 		// 모두 꺼진 상황에서 스위치 조작 최소 횟수 구하기
 	}
-	private static boolean on(int cnt) {
+	private static void on(int cnt, int idx) {
+		if (idx > N + 1) {
+			return;
+		}
 		if (correct()) {
-			if (res > cnt) res = cnt;
-			return true;
+			res = cnt;
+			return;
 		}
-		for (int i = 1; i <= N; i++) {
+		if (target[idx] != room[idx]) {
 			// 스위치 킴
-			for (int j = i; j <= N; j += i) {
+			for (int j = idx; j <= N; j += idx) {
 				if (room[j] == 0) room[j] = 1;
 				else room[j] = 0;
 			}
-			if (on(cnt + 1)) break;
-			// 다시 원상복구
-			for (int j = i; j <= N; j += i) {
+			on(cnt + 1, idx + 1);
+			// 원상복구
+			for (int j = idx; j <= N; j += idx) {
 				if (room[j] == 0) room[j] = 1;
 				else room[j] = 0;
 			}
+		} else {
+			on(cnt, idx + 1);
 		}
-		return false;
 	}
 	private static boolean correct() {
 		for (int i = 1; i <= N; i++) {
