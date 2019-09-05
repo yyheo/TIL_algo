@@ -50,7 +50,7 @@ public class Q8983_사냥꾼 {
 		}
 		System.out.println(res);
 	}
-	static class Posi implements Comparable<Posi>{
+	static class Posi implements Comparable<Posi> {
 		int y, x;
 		public Posi(int x, int y) {
 			super();

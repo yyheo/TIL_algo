@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 import javax.swing.InputMap;
 
-public class Q17281_야구게임_ing {
+public class Q17281_야구게임 {
 	static int N, max;
 	static int[][] player;
 	static int[] permuPl = new int[9];
@@ -65,7 +65,10 @@ public class Q17281_야구게임_ing {
 						ru[3] = true;
 						score++;
 					}
-					if(ru[1]) ru[2] = true;
+					if(ru[1]) {
+						ru[1] = false;
+						ru[2] = true;
+					}
 					if(ru[0]) ru[1] = true;
 					ru[0] = true;
 					break;
@@ -74,14 +77,17 @@ public class Q17281_야구게임_ing {
 						ru[2] = false;
 						ru[3] = true;
 						score++;
-					}
+					}	
 					if(ru[1]) {
 						ru[1] = false;
 						ru[3] = true;
 						score++;
 					}
-					if(ru[0]) ru[2] = true;
-					ru[2] = true;
+					if(ru[0]) {
+						ru[0] = false;
+						ru[2] = true;
+					}
+					ru[1] = true;
 					break;
 				case 3: // 3루타
 					if(ru[2]) {
