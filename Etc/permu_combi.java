@@ -8,9 +8,27 @@ public class permu_combi {
 	static int N = 3;
 	
 	public static void main(String[] args) {
-		permu(0);
+		//permu(0);
 		//combi(0, -1);
 		//percombi(0, 0);
+		powerset(0);
+	}
+	
+	// 부분집합
+	private static void powerset(int index) {
+		if(index == N) {
+			for (int i = 0; i < check.length; i++) {
+				if(check[i] == 1) {
+					System.out.print(num[i] + " ");
+				}
+			}
+			System.out.println();
+			return;
+		}
+		check[index] = 0;
+		powerset(index + 1);
+		check[index] = 1;
+		powerset(index + 1);
 	}
 
 	// 순열 + 조합 nPr
