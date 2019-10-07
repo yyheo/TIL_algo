@@ -1,5 +1,3 @@
-package tmpAlgo;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -94,13 +92,7 @@ public class Q17471_게리맨더링 {
 		int aRoot = find(a);
 		int bRoot = find(b);
 		if (aRoot != bRoot) {
-			if (a != aRoot) {
-				parents[b] = aRoot;
-			} else if (b != bRoot) {
-				parents[a] = bRoot;
-			} else {
-				parents[a] = bRoot;
-			}
+			parents[bRoot] = aRoot;
 		}
 	}
 	
