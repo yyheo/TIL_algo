@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class Solution_D4_6179_성수의프로그래밍강좌시청 {
+public class D4_6719_성수의프로그래밍강좌시청 {
 	static int T, N, K;
 	static double A;
 	static Integer[] num;
