@@ -201,7 +201,7 @@ INSERT INTO temp.test VALUES (1); -- 권한 없음
 ### Integration with Hadoop
 - PXF(Greenplum Platform Extension Framework)
 	- pxf config에서 어떤 format인지 설정
-#### Quiz (맞는 것 고르기
+#### Quiz (맞는 것 고르기)
 Insert 문으로는 한번에 한 row만 입력한다
 -> select insert 써서 여러개 가능,,
 **copy를 이용하여 데이터를 로드,언로드 모두 할 수 있다**
