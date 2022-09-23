@@ -253,7 +253,7 @@ gpfdist 프로세스는 external table을 drop 하면 kill된다
 - Dynamic SQL - Prepare And Execute
 - Exception 처리
 - Function: COST
-  함수에 대해 cost가 얼마나 발생할지 미리? 알려주는 것
+  함수에 대해 cost가 얼마나 발생할지 미리? 알려주는 것. (DISK I/O)
 ### Anonymous Blocks
 
 ## 10. Physical design
@@ -336,7 +336,7 @@ V 테이블 파티션 컬럼으로 날짜형을 많이 쓰는 편이다
 	- 파티션 사용
 - Short 쿼리 성능 개선을 위한 파라매터 설정이 아닌것은
 	- gp_segments_for_planner=2 V
-		broadcast 해라
+		작은값이면: broadcast 해라
 	- statememt_mem=32MB
 	- random_page_cost=1
 	- enable_nestloop=ON
@@ -360,3 +360,68 @@ V 테이블 파티션 컬럼으로 날짜형을 많이 쓰는 편이다
 	GROUP BY gp_segment_id) A ;
 	```
 
+## 12. Workload Management
+- OLTP
+	- 다수 사용자
+- DW
+	- 소수 사용자
+### Resource Group
+- Linux Cgroup이 inable되어 있어야 함
+- Group 별로 CPU, 메모리 사용량 Setting 가능
+- Transaction Concurrency Limit
+	gp_resource_group_bypass = true
+- CPU Limits
+	- CPU_RATE_LIMIT=40 (비율)
+	- default: gp_resource_group_cpu_ceiling_enforcement =false
+	- 남는 자원은 더 쓸 수 있음(elastic mode)
+	- CPUSET=‘1,3-4’ : 고정적으로 CPU를 할당
+- Memory Limits
+	- gp_resource_group_memory_limit
+	- MEMORY_SHARED_QUOTA
+```sql
+CREATE RESOURCE GROUP rgoltp WITH (CPU_RATE_LIMIT=30,MEMORY_LIMIT=30);
+CREATE RESOURCE GROUP rgadhoc WITH (CPU_RATE_LIMIT=30,MEMORY_LIMIT=30);
+CREATE RESOURCE GROUP rgbatch WITH (CPU_RATE_LIMIT=30,MEMORY_LIMIT=30);
+
+SELECT * FROM gp_toolkit.gp_resgroup_config;
+SELECT * FROM gp_toolkit.gp_resgroup_status;
+```
+#### Quiz
+- 그린플럼6에서 사용하는 워크로드 관리 기법의 이름은 : Resource Group
+- 그린플럼 워크로드 관리 기법에서 제어하지 않는 항목은
+	- 동시 접속 가능한 세션 수 
+	- 사용 가능한 데이터베이스 수 V
+	- 최대 메모리의 사용량
+	- 최대 CPU 사용량 또는 상대적 사용 비율
+
+## 13. Managing Greenplum Database
+- Useful Tools
+	- gpscp : copy
+	- gpssh
+	- gpcheckperf : 초반 install 후 쓰는. 전체 세그먼트의 Disk I/O, Memory 파악
+	- gpcheckcat : trouble shooting
+### Database maintenance
+- ANALYZE
+	- join, where, sort, group by/having 컬럼은 필수로 수행
+- ROOTPARTITION option for PQO
+	ANALYZE ROOTPARTITION foo;
+- VACUUM, VACUUM FULL
+#### Quiz
+- pg_hba.conf와 같은 configuration file 변경 후 데이터베이스 엔진에 반영시키기 위한 명령어는 gpstop -u
+- 다음중 통계정보를 갱신하지 않는 옵션은
+	- analyze
+	- vacuum analyze
+	- explain analyze V (실행 결과에 대해 분석)
+	- analyzedb
+- 다음중 vacuum을 실행해야할 시점으로 거리가 먼 것은
+	- 대량의 데이터 업데이트
+	- 대량의 데이터 삭제
+	- 여러번 데이터 로드 실패 후 V
+	- 대량의 데이터 언로드
+## Backup and Restore
+### Postgres backup tools
+- pg_dump
+	- 실제로는 잘 사용 안함
+- gpbackup and gprestore
+	- backup동안 lock을 잡는 시간이 줄어들었음
+	- backup동안 DDL문 실행 가능
