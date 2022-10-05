@@ -205,19 +205,17 @@ INSERT INTO temp.test VALUES (1); -- 권한 없음
 - PXF(Greenplum Platform Extension Framework)
 	- pxf config에서 어떤 format인지 설정
 #### Quiz (맞는 것 고르기)
-```
-Insert 문으로는 한번에 한 row만 입력한다
--> select insert 써서 여러개 가능,,
-**copy를 이용하여 데이터를 로드,언로드 모두 할 수 있다**
-external table은 데이터 로드 전용 인터페이스이다
--> 로드, 언로드 다 가능
-**gpload를 사용하기 위해서는 yaml 파일 정의가 필요하다
-pxf 프로토콜을 통해 이기종 데이터베이스와 연결할 수 있다**
-copy를 이용해 하둡시스템의 데이터를 로드할 수 있다
--> pxf
-gpfdist 프로세스는 external table을 drop 하면 kill된다
--> 서로 상관 없음
-```
+- Insert 문으로는 한번에 한 row만 입력한다
+  -> select insert 써서 여러개 가능,,
+- **copy를 이용하여 데이터를 로드,언로드 모두 할 수 있다**
+- external table은 데이터 로드 전용 인터페이스이다
+  -> 로드, 언로드 다 가능
+- **gpload를 사용하기 위해서는 yaml 파일 정의가 필요하다**
+- **pxf 프로토콜을 통해 이기종 데이터베이스와 연결할 수 있다**
+- copy를 이용해 하둡시스템의 데이터를 로드할 수 있다
+  -> pxf
+- gpfdist 프로세스는 external table을 drop 하면 kill된다
+  -> 서로 상관 없음
 #### 실습 : Lab6
 - error log 확인하는 법!
 
